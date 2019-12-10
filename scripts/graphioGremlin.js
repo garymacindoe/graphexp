@@ -287,6 +287,8 @@ var graphioGremlin = (function(){
 
 				$('#outputArea').html(msgs.map(function (i) {return '<p>' + i + '</p>'}).join(''));
 				$('#messageArea').html('');
+				$('#outputArea')[0].style.visibility = 'visible';
+				setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 			}
 		});
 	}
@@ -323,7 +325,8 @@ var graphioGremlin = (function(){
 					+"<p> Cannot connect to "+server_url+ " </p>");
 				$('#messageArea').html('');
 			}
-
+			$('#outputArea')[0].style.visibility = 'visible';
+        	setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 		};
 		ws.onmessage = function (event){
 			var response = JSON.parse(event.data);
@@ -331,6 +334,8 @@ var graphioGremlin = (function(){
 			if(!isInt(code) || code<200 || code>299) {
 				$('#outputArea').html(response.status.message);
 				$('#messageArea').html("Error retrieving data");
+				$('#outputArea')[0].style.visibility = 'visible';
+				setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 				return 1;
 			}
 			var data = response.result.data;
@@ -340,6 +345,8 @@ var graphioGremlin = (function(){
 					$('#messageArea').html('Could not write data to DB.' +
 						"<p> Possible cause: creating a edge with bad node ids "+
 						"(linking nodes not existing in the DB). </p>");
+	    			$('#outputArea')[0].style.visibility = 'visible';
+    				setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 					return 1;
 				} else {
 					//$('#outputArea').html(response.status.message);
@@ -373,6 +380,8 @@ var graphioGremlin = (function(){
 			//console.log(data)
 			$('#outputArea').html("<p> Data successfully written to the DB.</p>");
 			$('#messageArea').html('');
+			$('#outputArea')[0].style.visibility = 'visible';
+			setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 			return // TODO handle answer to check if data has been written
 		}
 		//console.log(COMMUNICATION_METHOD)
@@ -393,7 +402,8 @@ var graphioGremlin = (function(){
 			console.log(message)
 			$('#outputArea').html(message);
 			$('#messageArea').html('');
-
+			$('#outputArea')[0].style.visibility = 'visible';
+			setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 		}
 		if (query_type=='graphInfo'){
 			infobox.display_graph_info(data);
@@ -415,6 +425,8 @@ var graphioGremlin = (function(){
 
 		$('#outputArea').html(message);
 		$('#messageArea').html('');
+		$('#outputArea')[0].style.visibility = 'visible';
+		setTimeout(function() { $('#outputArea')[0].style.visibility = 'hidden' }, 5000);
 	}
 
 
